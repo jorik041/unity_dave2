@@ -6,26 +6,29 @@ public class dave : MonoBehaviour {
 
 	Utils.Directions direction=Directions.NONE;
 	Animator animator;
-	public static int Score=0;
-	public AudioSource audioPoint;
-	public GameObject dieAnimation;
+	float speed=3000f;
+	Vector3 tmpVector3;
+	bool CanJump=true;
 
 	void Start () {
 		animator = GetComponent<Animator>();
 	}
 
 	void FixedUpdate () {
+		if (CanJump) {
+			if (Input.GetKey (KeyCode.UpArrow)) {
+				rigidbody2D.AddForce(new Vector2(0f, 100000f));
+				CanJump=false;
+			}
+		}
+
 		switch (direction) {
 		case Directions.LEFT:
-			transform.rotation=Quaternion.Euler(0, 180, 0);
-			//rigidbody2D.velocity=-Vector2.right * speed;
-			//transform.position+=-Vector3.right * speed;
+			rigidbody2D.AddForce(-Vector2.right * speed);
 			animator.Play("move");
 			break;
 		case Directions.RIGHT:
-			transform.rotation=Quaternion.Euler(0, 0, 0);
-			//rigidbody2D.velocity=Vector2.right * speed;
-			//transform.position+=Vector3.right * speed;
+			rigidbody2D.AddForce(Vector2.right * speed);
 			animator.Play("move");
 			break;
 		case Directions.NONE:
@@ -35,10 +38,17 @@ public class dave : MonoBehaviour {
 	}
 
 	void Update () {
+		Debug.Log (rigidbody2D.velocity);
 		if (Input.GetKey (KeyCode.LeftArrow)) {
+			tmpVector3=transform.localScale;
+			tmpVector3.x=-1;
+			transform.localScale=tmpVector3;
 						direction = Directions.LEFT;
 				} else
 		if (Input.GetKey (KeyCode.RightArrow)) {
+			tmpVector3=transform.localScale;
+			tmpVector3.x=1;
+			transform.localScale=tmpVector3;
 						direction = Directions.RIGHT;
 				} else {
 						direction = Directions.NONE;

@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\camera.cs" />
      <Compile Include="Assets\dave\dave.cs" />
      <Compile Include="Assets\scripts\directions.cs" />
   </ItemGroup>
