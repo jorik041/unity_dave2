@@ -49,6 +49,7 @@
      <Compile Include="Assets\camera.cs" />
      <Compile Include="Assets\dave\dave.cs" />
      <Compile Include="Assets\scripts\directions.cs" />
+     <Compile Include="Assets\zombie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
