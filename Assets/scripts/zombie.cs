@@ -4,22 +4,37 @@ using Utils;
 
 public class zombie : MonoBehaviour {
 
-	Utils.Directions direction=Directions.LEFT;
+	public Utils.Directions direction=Directions.LEFT;
 	Animator animator;
 	float speed=30f;
-	float MaxSpeed=1f;
+	float MaxSpeed=0.2f;
 	Vector3 tmpVector3;
-	private Transform down_bump;
+	private Transform bumper;
 	
 	void Start () {
 		animator = GetComponent<Animator>();
+		bumper = transform.Find("bumper");
+	}
+	
+	void OnCollisionEnter2D (Collision2D col)
+	{
+		/*if (col.gameObject.CompareTag("World")){
+		switch (direction) {
+		case Directions.LEFT:
+			direction=Directions.RIGHT;
+			break;
+		case Directions.RIGHT:
+			direction=Directions.LEFT;
+			break;
+		};
+		}*/
 	}
 	
 	void FixedUpdate () {
 		switch (direction) {
 		case Directions.LEFT:
 			rigidbody2D.AddForce(-Vector2.right * speed);
-			animator.Play("move");
+			//animator.Play("move");
 
 			tmpVector3=transform.localScale;
 			tmpVector3.x=-1;
@@ -27,7 +42,7 @@ public class zombie : MonoBehaviour {
 			break;
 		case Directions.RIGHT:
 			rigidbody2D.AddForce(Vector2.right * speed);
-			animator.Play("move");
+			//animator.Play("move");
 
 			tmpVector3=transform.localScale;
 			tmpVector3.x=1;

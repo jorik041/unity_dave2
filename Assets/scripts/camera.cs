@@ -13,6 +13,6 @@ public class camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//todo добавить лерп
-		transform.position = new Vector3(player.transform.position.x,player.transform.position.y,transform.position.z);
+		transform.position = new Vector3(player.transform.position.x,(player.transform.position.y+0.5f),transform.position.z);
 	}
 }
