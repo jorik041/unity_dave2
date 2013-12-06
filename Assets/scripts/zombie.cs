@@ -5,15 +5,13 @@ using Utils;
 public class zombie : MonoBehaviour {
 
 	public Utils.Directions direction=Directions.LEFT;
-	Animator animator;
+	//Animator animator;
 	float speed=30f;
 	float MaxSpeed=0.2f;
 	Vector3 tmpVector3;
-	private Transform bumper;
 	
 	void Start () {
-		animator = GetComponent<Animator>();
-		bumper = transform.Find("bumper");
+		//animator = GetComponent<Animator>();
 	}
 	
 	void OnCollisionEnter2D (Collision2D col)
