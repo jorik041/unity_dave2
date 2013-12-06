@@ -23,6 +23,26 @@ public class dave : MonoBehaviour {
 		down_bump = transform.Find("down_bumper");
 	}
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("OneWayWorld"))
+        {
+            //Debug.Log("enter");
+            gameObject.layer=12;
+            //PlayerGhost   //12
+            //Player    //8
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("OneWayWorld"))
+        {
+            Debug.Log("exit");
+            gameObject.layer = 8;
+        }
+    }
+
 	void FixedUpdate () {
         if (!Shoot)
         {
