@@ -9,6 +9,7 @@ public class zombie : MonoBehaviour {
 	float speed=30f;
 	float MaxSpeed=0.2f;
 	Vector3 tmpVector3;
+    public int HP = 2;
 	
 	void Start () {
 		//animator = GetComponent<Animator>();
@@ -16,16 +17,7 @@ public class zombie : MonoBehaviour {
 	
 	void OnCollisionEnter2D (Collision2D col)
 	{
-		/*if (col.gameObject.CompareTag("World")){
-		switch (direction) {
-		case Directions.LEFT:
-			direction=Directions.RIGHT;
-			break;
-		case Directions.RIGHT:
-			direction=Directions.LEFT;
-			break;
-		};
-		}*/
+
 	}
 	
 	void FixedUpdate () {
@@ -51,6 +43,10 @@ public class zombie : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (HP == 0)
+        {
+            Destroy(this.gameObject);
+        }
 		if (rigidbody2D.velocity.x > MaxSpeed) {
 			Vector2 newVelocity = rigidbody2D.velocity;
 			newVelocity.x = MaxSpeed;
