@@ -25,21 +25,19 @@ public class dave : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("OneWayWorld"))
+        if (col.CompareTag("OneWayTrigger"))
         {
-            //Debug.Log("enter");
-            gameObject.layer=12;
-            //PlayerGhost   //12
-            //Player    //8
+            Debug.Log("enter");
+            gameObject.layer=13; //todo magic number
         }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("OneWayWorld"))
+        if (col.CompareTag("OneWayTrigger"))
         {
             Debug.Log("exit");
-            gameObject.layer = 8;
+            gameObject.layer = 8; //todo magic number
         }
     }
 
@@ -66,9 +64,9 @@ public class dave : MonoBehaviour {
 		if (oldGrounded!=grounded && grounded==true){
 			jumpEnd.Play();
 		}
-		
 
-		oldGrounded=Physics2D.Linecast(transform.position, down_bump.position, 1 << LayerMask.NameToLayer("World"));
+
+        oldGrounded = Physics2D.Linecast(transform.position, down_bump.position, 1 << LayerMask.NameToLayer("World") | 1 << LayerMask.NameToLayer("OneWayBlock"));
 	}
 
     void StopShoot()
@@ -77,17 +75,23 @@ public class dave : MonoBehaviour {
     }
 
 	void Update () {
-        grounded = Physics2D.Linecast(transform.position, down_bump.position, 1 << LayerMask.NameToLayer("World")); 
+        grounded = Physics2D.Linecast(transform.position, down_bump.position, 1 << LayerMask.NameToLayer("World") | 1 << LayerMask.NameToLayer("OneWayBlock"));
 		JumpButton=Input.GetKeyDown (KeyCode.UpArrow);
 
         Vector3 tmpv3 = transform.position;
-        tmpv3.x = tmpv3.x * 4;
+
         if (tmpVector3.x < 0)
         {
-            tmpv3.x = -tmpv3.x;
+            tmpv3.x = tmpv3.x - 1.7f;
+        }
+        else
+        {
+            tmpv3.x = tmpv3.x + 1.7f;
         }
 
         //Debug.DrawLine(transform.position, tmpv3, Color.red);
+        Debug.DrawLine(transform.position, down_bump.position);
+
 
         if (Input.GetKeyDown(KeyCode.Space) && !Shoot && grounded)
         {
